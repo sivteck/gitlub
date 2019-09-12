@@ -1,0 +1,32 @@
+{
+  "name": "gitlub",
+  "version": "1.0.0",
+  "description": "Collaborative software development platform",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivteck/gitlub.git"
+  },
+  "keywords": [
+    "git",
+    "source",
+    "control",
+    "issue",
+    "tracker",
+    "pull",
+    "requests"
+  ],
+  "author": "Sivaram Sivaraj Balakrishnan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sivteck/gitlub/issues"
+  },
+  "homepage": "https://github.com/sivteck/gitlub#readme",
+  "dependencies": [
+    "express",
+    "nodegit"
+  ]
+}
