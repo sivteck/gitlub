@@ -2,18 +2,19 @@ const express = require('express')
 const Git = require('nodegit')
 const fs = require('fs')
 
-app = express()
-const port = 80
+const port = 8080
 
-app.get('/', (req, res) => {
-  Git.Clone("https://github.com/sivteck/webserver", "./repos/webse")
-  .then(function(repo) { return 0})
-  fs.readdir('./repos', (err, files) => {
-    files.forEach(file => {
-      console.log(file)
-    })
-  res.send('meme kiill')
-  })
+app = express()
+
+app.use(express.static('./view/build'))
+app.use(express.json())
+
+app.post('/createRepo', (req, res) => {
+  console.log(req.body.userName)
+  console.log(req.body.repoName)
+  // Git.Repository.init(pathToRepo, isBare).then(function (repo) {
+  // });
+  res.send('Created Repo')
 })
 
-app.listen(port, () => console.log('listening on port 80'))
+app.listen(port, () => console.log('listening on port 8080'))
