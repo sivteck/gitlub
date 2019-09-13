@@ -16,7 +16,9 @@ function CreateRepo () {
 
   return (
     <form id="create-repo" onSubmit={handleSubmit} method="POST">
+      <label> User Name </label>
       <input type="text" id="user-name" /> <br />
+      <label> Repo Name </label>
       <input type="text" id="repo-name" /> <br />
       <button type="submit"> Create Repository </button>
     </form>
