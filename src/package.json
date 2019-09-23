@@ -27,6 +27,7 @@
   "homepage": "https://github.com/sivteck/gitlub#readme",
   "dependencies": [
     "express",
-    "nodegit"
+    "nodegit",
+    "neon-cli"
   ]
 }
