@@ -3,11 +3,13 @@ const Git = require('nodegit')
 const fs = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
-const gitServiceRPC = require('./gitServiceRPC')
+const { getInfoRefs } = require('./gitServiceRPC')
 
 const port = 8080
 
 app = express()
+
+app.disable('x-powered-by')
 
 app.use(express.static('./view/build'))
 app.use(express.json())
@@ -21,7 +23,7 @@ app.post('/createRepo', (req, res) => {
   res.send('Created Repo')
 })
 
-app.get('/repos/:userName/:repoName/info/refs', gitServiceRPC)
+app.get('/repos/:userName/:repoName/info/refs', getInfoRefs)
 // app.get('/repos/:repoName/info/refs', (req, res) => {
 //   gitServiceRPC(req, res, ' ')
 //   console.log(req.query)
