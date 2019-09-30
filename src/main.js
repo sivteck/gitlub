@@ -3,7 +3,7 @@ const Git = require('nodegit')
 const fs = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
-const gitServiceRPC = require('./gitServiceRPC')
+const { getInfoRefs, gitUploadPack } = require('./gitServiceRPC')
 
 const port = 8080
 
@@ -21,17 +21,8 @@ app.post('/createRepo', (req, res) => {
   res.send('Created Repo')
 })
 
-app.get('/repos/:userName/:repoName/info/refs', gitServiceRPC)
-// app.get('/repos/:repoName/info/refs', (req, res) => {
-//   gitServiceRPC(req, res, ' ')
-//   console.log(req.query)
-//   let repoName = req.params.repoName
-//   fs.readdir('./repos', (err, files) => {
-//   files.forEach(file => {
-//     console.log(file)
-//   })
-//   res.send('repo check')
-//   })
-// })
+app.get('/repos/:userName/:repoName/info/refs', getInfoRefs)
+
+app.post('/repos/:userName/:repoName/git-upload-pack', gitUploadPack)
 
 app.listen(port, () => console.log('listening on port 8080'))
