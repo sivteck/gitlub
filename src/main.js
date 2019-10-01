@@ -12,6 +12,9 @@ app = express()
 app.use(express.static('./view/build'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.raw({
+  type: 'application/x-git-upload-pack-request'
+}))
 
 app.post('/createRepo', (req, res) => {
   let userName = req.body.userName

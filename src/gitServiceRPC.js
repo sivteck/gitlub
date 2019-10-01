@@ -17,11 +17,10 @@ function addPrefix (data) {
 }
 
 async function getInfoRefs (req, res, err) {
+  console.log(req.headers)
   let userName = req.params.userName
   let repoName = req.params.repoName
   let service = req.query.service
-  console.log(req.body)
-  console.log(service)
   res.setHeader('Expires', 'Fri, 01 Jan 1980 00:00:00 GMT')
   res.setHeader('Pragma', 'no-cache')
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate')
@@ -34,6 +33,13 @@ async function getInfoRefs (req, res, err) {
 }
 
 function gitUploadPack (req, res, err) {
+  let userName = req.params.userName
+  let repoName = req.params.repoName
+  let git = spawn('git-upload-pack', ['--stateless-rpc', `repos/${userName}/${repoName}`])
+  git.stdin.write(req.body.toString())
+  git.stdout.pipe(res)
+  git.stdout.on('data', (data) => console.log(data))
+  git.stderr.on('data', (data) => console.log(`git stderr: ${data.toString()}`))
 }
 
-module.exports = { getInfoRefs }
+module.exports = { getInfoRefs, gitUploadPack }
