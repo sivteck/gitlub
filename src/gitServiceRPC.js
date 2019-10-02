@@ -17,7 +17,6 @@ function addPrefix (data) {
 }
 
 async function getInfoRefs (req, res, err) {
-  console.log(req.headers)
   let userName = req.params.userName
   let repoName = req.params.repoName
   let service = req.query.service
@@ -42,4 +41,13 @@ function gitUploadPack (req, res, err) {
   git.stderr.on('data', (data) => console.log(`git stderr: ${data.toString()}`))
 }
 
-module.exports = { getInfoRefs, gitUploadPack }
+function gitReceivePack (req, res, err) {
+  let userName = req.params.userName
+  let repoName = req.params.repoName
+  let git = spawn('git', ['receive-pack', `./repos/${userName}/${repoName}`])
+  console.log(req.body)
+  git.stdin.write(req.body)
+  git.stdout.pipe(res)
+}
+
+module.exports = { getInfoRefs, gitUploadPack, gitReceivePack }
