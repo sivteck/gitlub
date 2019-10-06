@@ -1,0 +1,6 @@
+.DS_Store
+src/repos/*
+src/view/public/*
+src/package-lock.json
+src/view/package-lock.json
+src/node_modules/*

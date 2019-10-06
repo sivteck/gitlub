@@ -26,7 +26,7 @@ app.post('/createRepo', (req, res) => {
   let isBare = 1
   Git.Repository.init(path.resolve(`./repos/${userName}/${repoName}`), isBare).then(function (repo) {
   })
-  res.send('Created Repo')
+  res.json({ msg: 'Created Repo' })
 })
 
 app.get('/repos/:userName/:repoName/info/refs', getInfoRefs)

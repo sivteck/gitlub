@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Collaborative software development platform",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sivteck/gitlub.git"
@@ -24,10 +21,21 @@
   "bugs": {
     "url": "https://github.com/sivteck/gitlub/issues"
   },
+  "scripts": {
+    "start": "cd view && npm run-script build && cd .. && node main.js"
+  },
+  "nodemonConfig": {
+    "watch": [ "./" ],
+    "ext": "js, css",
+    "ignore": [ "view/build", "view/public"]
+  },
   "homepage": "https://github.com/sivteck/gitlub#readme",
   "dependencies": [
     "express",
     "nodegit",
     "neon-cli"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
 }

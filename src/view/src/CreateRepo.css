@@ -1,0 +1,23 @@
+.create-repository__fields {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  font-family: arial;
+  font-size: 0.8em;
+}
+
+.create-repository--userName {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.create-repository--repoName {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.create-repository__button {
+  margin-left: 10px;
+}

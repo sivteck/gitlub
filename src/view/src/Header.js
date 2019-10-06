@@ -1,8 +1,11 @@
 import React from 'react'
+import './Header.css'
 
 function Header () {
   return (
-    <p> GitLub </p>
+    <nav> 
+      <a href="/"> GitLub </a>
+    </nav>
   )
 }
 
