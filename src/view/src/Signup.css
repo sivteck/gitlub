@@ -1,0 +1,24 @@
+.signup__fields {
+  font-size: 16px;
+}
+.signup--userName {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.signup--password {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.signup--email {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.signup__button {
+  margin-left: 10px;
+}

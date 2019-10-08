@@ -1,4 +1,14 @@
-.App {
+input {
+  border: 1px solid #d1d5da;
+  border-radius: 5px;
+}
+
+button {
+  border: 1px solid #d1d5da;
+  border-radius: 5px;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -31,3 +41,4 @@
     transform: rotate(360deg);
   }
 }
+*/

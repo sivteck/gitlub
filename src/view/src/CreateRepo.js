@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
+import Header from './Header.js';
 import './CreateRepo.css'
 
 function CreateRepo () {
@@ -28,6 +29,8 @@ function CreateRepo () {
   }
 
   return (
+    <>
+    <Header />
     <form className="create-repository" onSubmit={handleSubmit} method="POST" required>
     <div className="create-repository__fields">
     <div className="create-repository--userName">
@@ -45,6 +48,7 @@ function CreateRepo () {
     </div>
       <button className="create-repository__button" type="submit"> Create Repository </button>
     </form>
+    </>
   )
 }
 

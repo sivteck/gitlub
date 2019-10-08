@@ -1,14 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-// import './App.css';
-import Header from './Header.js';
-import CreateRepo from './CreateRepo.js';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css';
+import CreateRepo from './CreateRepo.js'
+import Homepage from './Homepage.js'
+import Signup from './Signup.js'
+import { Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-    <Header />
-    <CreateRepo />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/createRepo" component={CreateRepo} />
+      </Switch>
     </div>
   );
 }

@@ -35,4 +35,8 @@ app.post('/repos/:userName/:repoName/git-upload-pack', gitUploadPack)
 
 app.post('/repos/:userName/:repoName/git-receive-pack', gitReceivePack)
 
+app.post('/signup', (req, res, err) => {
+  console.log(req.body)
+})
+
 app.listen(port, () => console.log('listening on port 8080'))

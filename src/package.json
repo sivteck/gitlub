@@ -25,15 +25,22 @@
     "start": "cd view && npm run-script build && cd .. && node main.js"
   },
   "nodemonConfig": {
-    "watch": [ "./" ],
+    "watch": [
+      "./"
+    ],
     "ext": "js, css",
-    "ignore": [ "view/build", "view/public"]
+    "ignore": [
+      "view/build",
+      "view/public"
+    ]
   },
   "homepage": "https://github.com/sivteck/gitlub#readme",
   "dependencies": [
     "express",
     "nodegit",
-    "neon-cli"
+    "neon-cli",
+    "pg",
+    "redis"
   ],
   "devDependencies": {
     "nodemon": "^1.19.3"
