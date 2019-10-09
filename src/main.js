@@ -2,6 +2,7 @@ const express = require('express')
 const Git = require('nodegit')
 const fs = require('fs')
 const path = require('path')
+const { createUser, verifyPassword } = require('./model/schema.js')
 const { spawn } = require('child_process')
 const { getInfoRefs, gitUploadPack, gitReceivePack } = require('./gitServiceRPC')
 
@@ -35,8 +36,26 @@ app.post('/repos/:userName/:repoName/git-upload-pack', gitUploadPack)
 
 app.post('/repos/:userName/:repoName/git-receive-pack', gitReceivePack)
 
-app.post('/signup', (req, res, err) => {
-  console.log(req.body)
+app.post('/signup', async (req, res, err) => {
+  try {
+    let id = await createUser(req.body.userName, req.body.password, req.body.email)
+    res.json({ id: id })
+  }
+  catch (error) {
+    console.log('Signup Error, ', error)
+  }
 })
+
+app.post('/login', async (req, res, err) => {
+  console.log(verifyPassword)
+  try {
+    let passwordMatch = await verifyPassword(req.body.userName, req.body.password)
+    console.log('passwordMatch: ', passwordMatch)
+  }
+  catch (error) {
+    console.log('Unable to login user, ', error)
+  }
+})
+
 
 app.listen(port, () => console.log('listening on port 8080'))

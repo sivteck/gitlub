@@ -1,0 +1,18 @@
+.login__fields {
+  font-size: 16px;
+}
+.login--userName {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.login--password {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.login__button {
+  margin-left: 10px;
+}

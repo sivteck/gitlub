@@ -40,7 +40,9 @@
     "nodegit",
     "neon-cli",
     "pg",
-    "redis"
+    "ioredis",
+    "uuid",
+    "bcrypt"
   ],
   "devDependencies": {
     "nodemon": "^1.19.3"

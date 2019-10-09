@@ -4,6 +4,7 @@ import './App.css';
 import CreateRepo from './CreateRepo.js'
 import Homepage from './Homepage.js'
 import Signup from './Signup.js'
+import Login from './Login.js'
 import { Route, Switch } from 'react-router-dom'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/createRepo" component={CreateRepo} />
       </Switch>
     </div>
