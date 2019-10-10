@@ -37,6 +37,7 @@
   "homepage": "https://github.com/sivteck/gitlub#readme",
   "dependencies": [
     "express",
+    "express-session",
     "nodegit",
     "neon-cli",
     "pg",

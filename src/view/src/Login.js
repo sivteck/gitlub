@@ -1,27 +1,31 @@
 import { useState } from 'react';
 import React from 'react';
 import Header from './Header.js';
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import './Login.css'
 
-function Signup () {
+function Login () {
   let [userName, setUserName] = useState('')
   let [password, setPassword] = useState('')
+  let [redirect, setRedirect] = useState(false)
 
   async function handleSubmit (e) {
     e.preventDefault()
     let payload = { userName: userName, password: password }
     let headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-    let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload) }
+    let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload), redirect: 'follow' }
     try {
       let res = await fetch('/login', reqBody)
-      let resJSON = await res.json()
-      console.log(resJSON)
+      if (res.redirected) setRedirect(true)
+      console.log(redirect)
+      console.log('fetch request made? aye lmao')
     }
     catch (error) {
       console.log('Error Loggin in: /login route: ', error)
     }
   }
+
+  if (redirect) return <Redirect to={"/" + userName} />
 
   return (
     <>
@@ -41,4 +45,4 @@ function Signup () {
   )
 }
 
-export default Signup
+export default Login

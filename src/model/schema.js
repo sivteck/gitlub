@@ -34,7 +34,6 @@ async function createUser (userName, password, email) {
       text: 'INSERT INTO users VALUES($1, $2, $3, $4, $5) RETURNING id',
       values: [id, userName, salt, passwordHash, email]
     }
-
     let result = await pool.query(query)
     return result.rows[0].id
   }
@@ -59,4 +58,18 @@ async function verifyPassword (userName, password) {
   }
 }
 
-module.exports = { createUser, verifyPassword }
+async function userExists (userName) {
+  const query = {
+    text: 'SELECT id FROM users WHERE username = $1',
+    values: [userName]
+  }
+  try {
+    let result = await pool.query(query)
+    return result.rows[0]
+  }
+  catch (error) {
+    console.log('Error trying to lookup user, ', userName, error)
+  }
+}
+
+module.exports = { createUser, verifyPassword, userExists }
