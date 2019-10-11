@@ -15,7 +15,7 @@ function Signup () {
     let headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload) }
     try {
-      let res = await fetch('/signup', reqBody)
+      let res = await fetch('http://localhost:8080/signup', reqBody)
       let resJSON = await res.json()
       console.log(resJSON)
     }

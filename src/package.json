@@ -38,6 +38,7 @@
   "dependencies": [
     "express",
     "express-session",
+    "connect-redis",
     "nodegit",
     "neon-cli",
     "pg",

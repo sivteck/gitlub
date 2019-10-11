@@ -6,6 +6,7 @@ import Homepage from './Homepage.js'
 import Signup from './Signup.js'
 import Login from './Login.js'
 import UserDash from './UserDash.js'
+import Repo from './Repo.js'
 import { Route, Switch } from 'react-router-dom'
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/createRepo" component={CreateRepo} />
-        <Route exact path="/:user" component={UserDash} />
+        <Route exact path="/:userName" component={UserDash} />
+        <Route exact path="/:userName/:repoName" component={Repo} />
       </Switch>
     </div>
   );

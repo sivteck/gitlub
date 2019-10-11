@@ -1,13 +1,5 @@
 const { spawn } = require('child_process')
-
-async function getOutput (readable) {
-  readable.setEncoding('utf-8')
-  let data = ''
-  for await (const chunk of readable) {
-    data += chunk
-  }
-  return data
-}
+const { getOutput } = require('./utils.js')
 
 function addPrefix (data) {
   let len = data.length + 4
@@ -16,7 +8,7 @@ function addPrefix (data) {
   return prefix + data
 }
 
-async function getInfoRefs (req, res, err) {
+async function getInfoRefs (req, res) {
   let userName = req.params.userName
   let repoName = req.params.repoName
   let service = req.query.service
@@ -31,7 +23,7 @@ async function getInfoRefs (req, res, err) {
   res.send(data)
 }
 
-function gitUploadPack (req, res, err) {
+function gitUploadPack (req, res) {
   let userName = req.params.userName
   let repoName = req.params.repoName
   let git = spawn('git-upload-pack', ['--stateless-rpc', `repos/${userName}/${repoName}`])
@@ -40,7 +32,7 @@ function gitUploadPack (req, res, err) {
   git.stderr.on('data', (data) => console.log(`git stderr: ${data.toString()}`))
 }
 
-function gitReceivePack (req, res, err) {
+function gitReceivePack (req, res) {
   let userName = req.params.userName
   let repoName = req.params.repoName
   let git = spawn('git', ['receive-pack', `./repos/${userName}/${repoName}`])

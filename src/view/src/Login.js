@@ -13,10 +13,11 @@ function Login () {
     e.preventDefault()
     let payload = { userName: userName, password: password }
     let headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-    let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload), redirect: 'follow' }
+    let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload) }
     try {
-      let res = await fetch('/login', reqBody)
-      if (res.redirected) setRedirect(true)
+      let res = await fetch('http://localhost:8080/login', reqBody)
+      let resM = await res.json()
+      if (resM.msg === 'login success') setRedirect(true)
       console.log(redirect)
       console.log('fetch request made? aye lmao')
     }
