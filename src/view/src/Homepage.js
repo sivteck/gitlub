@@ -7,7 +7,7 @@ function Homepage () {
   return (
     <>
       <Header />
-      <Link to="/createRepo"> Create Repo </Link>
+      <p> Collaborative development platform, Signup and Login to create repositories </p>
     </>
   )
 }

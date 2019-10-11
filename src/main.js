@@ -73,11 +73,16 @@ app.post('/login', async (req, res) => {
     let passwordMatch = await verifyPassword(req.body.userName, req.body.password)
     console.log('passwordMatch: ', passwordMatch)
     req.session.user = req.body.userName
+    req.session.loggedin = true
     res.json({ msg: 'login success' })
   }
   catch (error) {
     console.log('Unable to login user, ', error)
   }
+})
+
+app.get('/logout', async (req, res) => {
+  req.session.destroy(() => res.json({ msg: 'logged out' }))
 })
 
 app.post('/:userName', async (req, res) => {

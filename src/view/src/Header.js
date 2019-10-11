@@ -7,7 +7,8 @@ function Header () {
     <nav> 
       <a href="/"> GitLub </a> |
       <Link to="/signup"> Sign Up </Link> |
-      <Link to="/login"> Log In </Link>
+      <Link to="/login"> Log In </Link> |
+      <Link to="/logout"> Log Out </Link>
     </nav>
   )
 }

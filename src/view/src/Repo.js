@@ -14,6 +14,7 @@ function Repo () {
     try {
       let res = await fetch('http://localhost:8080/' + user + '/' + repo, reqBody)
       let repoFilesRes = await res.json()
+      console.log(res)
       setRepoFiles(repoFilesRes)
     }
     catch (error) {
