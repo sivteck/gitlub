@@ -1,11 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import Header from './Header.js';
 import './CreateRepo.css'
 
-function CreateRepo () {
+function CreateRepo (props) {
   let [userName, setUserName] = useState('')
   let [repoName, setRepoName] = useState('')
+
+  const checkValidSession = async () => {
+    let payload = {}
+    let headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+    let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload) }
+    try {
+      let res = await fetch('http://localhost:8080/checkValidSession', reqBody)
+      let sessionInfo = await res.json()
+      console.log(sessionInfo)
+      if (sessionInfo.userName) setUserName(sessionInfo.userName)
+    }
+    catch (error) {
+      console.log('Error validating session: ', error)
+    }
+  }
+
+  useEffect( () => {
+    checkValidSession()
+  }, [])
+
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -30,7 +50,7 @@ function CreateRepo () {
 
   return (
     <>
-    <Header />
+    <Header loggedIn={props.loggedIn} userName={props.userName}/>
     <form className="create-repository" onSubmit={handleSubmit} method="POST" required>
     <div className="create-repository__fields">
     <div className="create-repository--userName">

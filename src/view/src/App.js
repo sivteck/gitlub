@@ -9,8 +9,10 @@ import Logout from './Logout.js'
 import UserDash from './UserDash.js'
 import Repo from './Repo.js'
 import { Route, Switch } from 'react-router-dom'
+import { StateContext } from './State.js'
 
 function App() {
+  console.log(useContext(StateContext))
   return (
     <div className="App">
       <Switch>

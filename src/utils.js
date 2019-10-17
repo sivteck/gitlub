@@ -17,6 +17,7 @@ async function getRepos (userName) {
   }
   catch (error) {
     console.log('Unable to fetch repos of user, ', userName, error)
+    return []
   }
   return repos
 }

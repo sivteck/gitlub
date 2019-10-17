@@ -45,6 +45,11 @@ app.use(express.raw({
 }))
 
 app.post('/createRepo', (req, res) => {
+  if (!req.session.user) {
+    res.json({ msg: "Error: unauthorized, login to create repository" })
+    res.end()
+    return
+  }
   let userName = req.body.userName
   let repoName = req.body.repoName
   let isBare = 1
@@ -58,6 +63,7 @@ app.post('/repos/:userName/:repoName/git-upload-pack', gitUploadPack)
 app.post('/repos/:userName/:repoName/git-receive-pack', gitReceivePack)
 
 app.post('/signup', async (req, res) => {
+  console.log('from /signup', req.session)
   try {
     let id = await createUser(req.body.userName, req.body.password, req.body.email)
     res.json({ id: id })
@@ -68,13 +74,14 @@ app.post('/signup', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
+  console.log('from /login', req.session)
   console.log(verifyPassword)
   try {
     let passwordMatch = await verifyPassword(req.body.userName, req.body.password)
     console.log('passwordMatch: ', passwordMatch)
     req.session.user = req.body.userName
     req.session.loggedin = true
-    res.json({ msg: 'login success' })
+    res.json({ msg: 'login success', userName: req.body.userName })
   }
   catch (error) {
     console.log('Unable to login user, ', error)
@@ -82,18 +89,20 @@ app.post('/login', async (req, res) => {
 })
 
 app.get('/logout', async (req, res) => {
+  console.log('from logout', req.session)
   req.session.destroy(() => res.json({ msg: 'logged out' }))
 })
 
 app.post('/:userName', async (req, res) => {
+  console.log(req.params)
   console.log(req.body)
-  console.log(req.session)
+  console.log('from /username', req.session)
   let userName = req.body.userName
   let checkUser = await userExists(userName)
   if (checkUser) {
     let repos = await getRepos(userName)
     console.log(repos)
-    res.json(repos)
+    res.json({ repos: repos, userName: userName })
   }
   else {
     res.json({ msg: "no such user" })
@@ -101,6 +110,7 @@ app.post('/:userName', async (req, res) => {
 })
 
 app.post('/:userName/:repoName', async (req, res) => {
+  console.log('from username/reponame', req.session)
   let userName = req.body.userName
   let repoName = req.body.repoName
   let checkUser = await userExists(userName)
@@ -108,6 +118,12 @@ app.post('/:userName/:repoName', async (req, res) => {
     let repoFiles = await getRepoFiles(userName, repoName)
     res.json(repoFiles)
   } else res.json({ msg: "no such repo" })
+})
+
+app.post('/checkValidSession', async (req, res) => {
+  console.log('from /checkValidSession', req.session)
+  if (req.session.user) res.json({ userName: req.session.user })
+  else res.json({ msg: "not logged in" })
 })
 
 app.listen(port, () => console.log('listening on port 8080'))

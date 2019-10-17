@@ -13,9 +13,8 @@ function UserDash () {
     let reqBody = { headers: headers, method: 'POST', body: JSON.stringify(payload), redirect: 'follow' }
     try {
       let res = await fetch('http://localhost:8080/' + user, reqBody)
-      let reposM = await res.json()
-      setRepos(reposM)
-      console.log("les repos")
+      let resJson = await res.json()
+      setRepos(resJson.repos)
     }
     catch (error) {
       console.log('Error accessing user info: ', user, error)
@@ -29,10 +28,10 @@ function UserDash () {
 
   return (
     <>
-      <Header />
+      <Header loggedIn={true} userName={userName}/>
       <p> Welcome {userName}! </p>
-      {repos.map(repo => <Link to={`/${userName}/${repo}`}> {repo} </Link> )}
-      <Link to="/createRepo"> Create Repo </Link>
+      <Link to="/createRepo"> Create Repo </Link> <br />
+      {repos.map(repo => <> <Link to={`/${userName}/${repo}`}> {repo} </Link> <br /> </>)}
     </>
   )
 }

@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import React from 'react';
 import Header from './Header.js';
-import { Link } from 'react-router-dom'
 import './Signup.css'
+import { Redirect, Link } from 'react-router-dom'
 
 function Signup () {
   let [userName, setUserName] = useState('')
   let [password, setPassword] = useState('')
   let [email, setEmail] = useState('')
+  let [redirect, setRedirect] = useState(false)
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -17,12 +18,15 @@ function Signup () {
     try {
       let res = await fetch('http://localhost:8080/signup', reqBody)
       let resJSON = await res.json()
+      if (resJSON.id) setRedirect(true)
       console.log(resJSON)
     }
     catch (error) {
       console.log('Error registering user: /signup route: ', error)
     }
   }
+
+  if (redirect) return <Redirect to={"/" + userName} />
 
   return (
     <>

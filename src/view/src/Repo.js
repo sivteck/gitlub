@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header.js';
 import { Link, useParams } from 'react-router-dom'
 
-function Repo () {
+function Repo ({ loggedIn }) {
   let { userName, repoName } = useParams()
   let [repoFiles, setRepoFiles] = useState([])
 
@@ -28,7 +28,7 @@ function Repo () {
 
   return (
     <>
-      <Header />
+      <Header loggedIn={true} userName={userName}/>
       {repoFiles.map(repoFile => <p> {repoFile} </p>)}
     </>
   )
