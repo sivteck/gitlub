@@ -93,6 +93,15 @@ app.get('/logout', async (req, res) => {
   req.session.destroy(() => res.json({ msg: 'logged out' }))
 })
 
+app.post('/checkValidSession', async (req, res) => {
+  console.log('from /checkValidSession', req.session)
+  if (req.session.user) res.json({ userName: req.session.user })
+  else res.json({ msg: "not logged in" })
+})
+
+app.post('/fork', async (req, res) => {
+})
+
 app.post('/:userName', async (req, res) => {
   console.log(req.params)
   console.log(req.body)
@@ -120,10 +129,5 @@ app.post('/:userName/:repoName', async (req, res) => {
   } else res.json({ msg: "no such repo" })
 })
 
-app.post('/checkValidSession', async (req, res) => {
-  console.log('from /checkValidSession', req.session)
-  if (req.session.user) res.json({ userName: req.session.user })
-  else res.json({ msg: "not logged in" })
-})
 
 app.listen(port, () => console.log('listening on port 8080'))
